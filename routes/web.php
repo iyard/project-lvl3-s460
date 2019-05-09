@@ -1,6 +1,5 @@
 <?php
 
-//use Barryvdh\Debugbar\Facade as Debugbar;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
