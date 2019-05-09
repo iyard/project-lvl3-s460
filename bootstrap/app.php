@@ -84,7 +84,7 @@ $app->singleton(
 if (env('APP_DEBUG')) {
     $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
    }
-//$app->configure('debugbar');
+$app->configure('debugbar');
 
 
 /*
