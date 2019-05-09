@@ -12,6 +12,5 @@
 */
 
 $router->get('/', function ()  {
-    Debugbar::error('Error!');
     return view('index', ['name' => 'James']);
 });
