@@ -5,7 +5,7 @@ use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class DomainsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
 
     public function testCreatedDomain()
     {
