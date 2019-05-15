@@ -4,13 +4,12 @@ php:
 services:
     - postgresql
 before_script:
-    - cp .env.travis .env
     - mysql -e 'create database forge_test;'
    
 install:
     - composer self-update
     - make install
-    - php artisan migrate
+    - php artisan migrate --no-interaction
 script:
     - make lint test
     
