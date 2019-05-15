@@ -1,14 +1,14 @@
 language: php
 php:
     - '7.3'
-install:
-    - composer self-update
-    - make install
-script:
-    - make lint test
 services:
     - postgresql
 before_script:
     - psql -c 'create database travis_ci_test;' -U postgres
-migrate:
+install:
+    - composer self-update
+    - make install
+script:
     - make migrate
+    - make lint test
+    
