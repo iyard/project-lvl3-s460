@@ -13,6 +13,3 @@ logs:
 lint:
 	composer run-script phpcs -- --standard=PSR12 --ignore=*/vendor/*,*/tests/*,*/bootstrap/*,*/storage/*,*/resources/*,*/config/*,*/public/index.php,*/database/*,*.css,*.js ./
 
-migrate:
-	- php artisan migrate
-
