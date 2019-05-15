@@ -11,6 +11,6 @@
 |
 */
 
-$router->get('/', function ()  {
-    return view('index', ['name' => 'James']);
-});
+$router->get('/', ['as' => 'index', 'uses' => 'IndexController@show']);
+$router->post('/domains', 'DomainsController@store');
+$router->get('/domains/{id}', ['as' => 'showdomain', 'uses' => 'DomainsController@show']);

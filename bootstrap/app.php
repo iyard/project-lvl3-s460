@@ -23,7 +23,7 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -82,10 +82,10 @@ $app->singleton(
 
 // enable laravel debug-panel
 if (env('APP_DEBUG')) {
+    $app->configure('app');
+    $app->configure('debugbar');
     $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
-   }
-$app->configure('debugbar');
-
+    }
 
 /*
 |--------------------------------------------------------------------------

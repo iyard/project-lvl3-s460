@@ -11,7 +11,4 @@ logs:
 	- tail -f storage/logs/lumen.log
 
 lint:
-	composer run-script phpcs -- --standard=PSR12 --ignore=*/vendor/*,*/tests/*,*/bootstrap/*,*/public/index.php,*/database/*,*.css,*.js ./
-
-lint-fix:
-	composer run-script phpcbf -- --standard=PSR12 --ignore=*/vendor/*,*/tests/*,*/bootstrap/*,*/public/index.php,*/database/*,*.css,*.js ./
+	composer run-script phpcs -- --standard=PSR12 --ignore=*/vendor/*,*/tests/*,*/bootstrap/*,*/storage/*,*/resources/*,*/config/*,*/public/index.php,*/database/*,*.css,*.js ./
