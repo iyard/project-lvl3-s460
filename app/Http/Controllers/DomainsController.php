@@ -19,16 +19,22 @@ class DomainsController extends Controller
         $validator = Validator::make($request->all(), ['url' => 'required|URL']);
         if ($validator->fails()) {
             $urlErrorMessage = 'Not a valid url. Please enter valid URL (example - http://varvy.com)';
-            return redirect()->route('index', ['urlErrorMessage' => $urlErrorMessage]);
+            return redirect()->route('index.show', ['urlErrorMessage' => $urlErrorMessage]);
         }
         $url = $request->input('url');
         $id = DB::table('domains')->insertGetId(['name' => $url]);
-        return redirect()->route('showdomain', ['id' => $id]);
+        return redirect()->route('domains.show', ['id' => $id]);
     }
     
     public function show($id)
     {
         $url = DB::select('select * from domains where id = ?', [$id]);
         return view('domains', ['url' => $url]);
+    }
+
+    public function index(Request $request, $page = 1)
+    {
+        $urls = DB::table('domains')->paginate(2);
+        return view('domainsIndex', ['urls' => $urls]);
     }
 }
