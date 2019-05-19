@@ -22,6 +22,12 @@ class DomainsController extends Controller
             return redirect()->route('index.show', ['urlErrorMessage' => $urlErrorMessage]);
         }
         $url = $request->input('url');
+
+        if ($this->isUrlAddedToDB($url)) {
+            $urlErrorMessage = 'Url is already added to database.';
+            return redirect()->route('index.show', ['urlErrorMessage' => $urlErrorMessage]);
+        }
+
         $id = DB::table('domains')->insertGetId(['name' => $url]);
         return redirect()->route('domains.show', ['id' => $id]);
     }
@@ -34,7 +40,13 @@ class DomainsController extends Controller
 
     public function index(Request $request, $page = 1)
     {
-        $urls = DB::table('domains')->paginate(2);
+        $urls = DB::table('domains')->paginate(4);
         return view('domainsIndex', ['urls' => $urls]);
+    }
+
+    public function isUrlAddedToDB($urlName)
+    {
+        $url = DB::select('select * from domains where name = ?', [$urlName]);
+        return !empty($url);
     }
 }

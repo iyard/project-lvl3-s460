@@ -9,20 +9,21 @@ class DomainsTest extends TestCase
 
     public function testStore()
     {
-        $this->post('domains.store', ['url' => 'http://google.com']);
+        $this->post('/domains', ['url' => 'http://google.com']);
         $this->seeStatusCode(302);
         $this->seeInDatabase('domains', ['name' => 'http://google.com']);
     }
 
     public function testIndex()
     {
-        $this->get('domains.index');
+        $this->get('/domains');
+        $this->seeStatusCode(200);
 
     }
 
     public function testShow()
     {
-        $this->get('domains.show', ['id' => 1]);
-        $this->seeStatusCode(302);
+        $this->get('/domains', ['id' => 1]);
+        $this->seeStatusCode(200);
     }
 }
