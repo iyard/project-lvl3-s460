@@ -15,4 +15,3 @@ $router->get('/', ['as' => 'index.show', 'uses' => 'IndexController@show']);
 $router->post('/domains', ['as' => 'domains.store', 'uses' => 'DomainsController@store']);
 $router->get('/domains', ['as' => 'domains.index', 'uses' => 'DomainsController@index']);
 $router->get('/domains/{id}', ['as' => 'domains.show', 'uses' => 'DomainsController@show']);
-
