@@ -12,7 +12,6 @@ install:
     - make install
 script:
     - make lint test
-after_script:
-  - php artisan queue:work
+    
 
     
