@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
+use Carbon\Carbon;
+use App\Jobs\ParseJob;
 
 class DomainsController extends Controller
 {
-    /**
-     * Store a new domain.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
+    private $client;
+    
+    public function __construct()
+    {
+        $this->client = new Client();
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), ['url' => 'required|URL']);
@@ -27,8 +31,18 @@ class DomainsController extends Controller
             $urlErrorMessage = 'Url is already added to database.';
             return redirect()->route('index.show', ['urlErrorMessage' => $urlErrorMessage]);
         }
-
-        $id = DB::table('domains')->insertGetId(['name' => $url]);
+        
+        $response = $this->client->request('GET', $url);
+        $contentLengthHeader = $response->getHeader('Content-Length');
+        $contentLength = isset($contentLengthHeader[0]) ? $contentLengthHeader[0] : 0;
+        $responseCode = $response->getStatusCode();
+        $id = DB::table('domains')->insertGetId(['name' => $url,
+                                                 'created_at' => Carbon::now()->toDateTimeString(),
+                                                 'contentLength' => $contentLength,
+                                                 'responseCode' => $responseCode,
+                                                 'body' => ''
+                                                 ]);
+        dispatch(new ParseJob($url));
         return redirect()->route('domains.show', ['id' => $id]);
     }
     

@@ -8,8 +8,8 @@
             <tr>
             <th scope="col">id</th>
             <th scope="col">URL</th>
-            <th scope="col">...</th>
-            <th scope="col">...</th>
+            <th scope="col">Response Code</th>
+            <th scope="col">content-length</th>
             </tr>
         </thead>
         <tbody>
@@ -17,8 +17,8 @@
                 <tr>
                 <th scope="row">{{ $url->id }}</th>
                 <td><a href="{{ $url->name }}">{{ $url->name }}</a></td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>{{ $url->responseCode }}</td>
+                <td>{{ $url->contentLength }}</td>
                 </tr>
             @endforeach
         </tbody>

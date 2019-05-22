@@ -82,7 +82,7 @@ $app->singleton(
 
 // enable laravel debug-panel
 if (env('APP_DEBUG')) {
-    //$app->configure('app');
+    $app->configure('app');
     $app->configure('phpunit');
     $app->configure('debugbar');
     $app->configure('database');

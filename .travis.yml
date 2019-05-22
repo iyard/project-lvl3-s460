@@ -10,8 +10,9 @@ before_script:
 install:
     - composer self-update
     - make install
-   
 script:
     - make lint test
+after_script:
+  - php artisan queue:work
 
     
