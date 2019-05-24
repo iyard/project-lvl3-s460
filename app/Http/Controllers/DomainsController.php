@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use App\Jobs\ParseJob;
+use DiDom\Document;
 
 class DomainsController extends Controller
 {
@@ -36,11 +37,15 @@ class DomainsController extends Controller
         $contentLengthHeader = $response->getHeader('Content-Length');
         $contentLength = isset($contentLengthHeader[0]) ? $contentLengthHeader[0] : 0;
         $responseCode = $response->getStatusCode();
+
         $id = DB::table('domains')->insertGetId(['name' => $url,
                                                  'created_at' => Carbon::now()->toDateTimeString(),
                                                  'contentLength' => $contentLength,
                                                  'responseCode' => $responseCode,
-                                                 'body' => ''
+                                                 'body' => '',
+                                                 'h1' => '',
+                                                 'keywords' => '',
+                                                 'description' => ''
                                                  ]);
         dispatch(new ParseJob($url));
         return redirect()->route('domains.show', ['id' => $id]);

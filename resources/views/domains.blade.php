@@ -10,6 +10,9 @@
             <th scope="col">URL</th>
             <th scope="col">Response Code</th>
             <th scope="col">content-length</th>
+            <th scope="col">H1</th>
+            <th scope="col">Keywords</th>
+            <th scope="col">Description</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +21,9 @@
             <td>{{ $url[0]->name }}</td>
             <td>{{ $url[0]->responseCode }}</td>
             <td>{{ $url[0]->contentLength }}</td>
+            <td>{{ $url[0]->h1 }}</td>
+            <td>{{ $url[0]->keywords }}</td>
+            <td>{{ $url[0]->description }}</td>
             </tr>
         </tbody>
     </table>
