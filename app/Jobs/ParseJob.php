@@ -3,23 +3,22 @@
 namespace App\Jobs;
 
 use Illuminate\Support\Facades\DB;
-use GuzzleHttp\Client;
 use Carbon\Carbon;
 use DiDom\Document;
 
 class ParseJob extends Job
 {
     private $url;
+    private $guzzle;
 
     public function __construct($url)
     {
         $this->url = $url;
     }
 
-    public function handle()
+    public function handle(\GuzzleHttp\Client $guzzle)
     {
-        $client = new Client();
-        $response = $client->request('GET', $this->url);
+        $response = $guzzle->request('GET', $this->url);
         $body = $response->getBody();
         
         $document = new Document($this->url, true);

@@ -5,18 +5,17 @@ namespace App\Http\Controllers;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use GuzzleHttp\Client;
 use Carbon\Carbon;
 use App\Jobs\ParseJob;
 use DiDom\Document;
 
 class DomainsController extends Controller
 {
-    private $client;
+    private $guzzle;
     
-    public function __construct()
+    public function __construct(\GuzzleHttp\Client $guzzle)
     {
-        $this->client = new Client();
+        $this->guzzle = $guzzle;
     }
 
     public function store(Request $request)
@@ -33,7 +32,7 @@ class DomainsController extends Controller
             return redirect()->route('index.show', ['urlErrorMessage' => $urlErrorMessage]);
         }
         
-        $response = $this->client->request('GET', $url);
+        $response = $this->guzzle->request('GET', $url);
         $contentLengthHeader = $response->getHeader('Content-Length');
         $contentLength = isset($contentLengthHeader[0]) ? $contentLengthHeader[0] : 0;
         $responseCode = $response->getStatusCode();
