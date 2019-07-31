@@ -20,7 +20,6 @@ class ParseJob extends Job
     {
         $response = $guzzle->request('GET', $this->url);
         $body = $response->getBody();
-        
         $document = new Document($this->url, true);
         $h1Html = $document->find('h1');
         $h1 = isset($h1Html[0]) ? $h1Html[0]->text() : '' ;

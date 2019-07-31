@@ -36,7 +36,6 @@ class DomainsController extends Controller
         $contentLengthHeader = $response->getHeader('Content-Length');
         $contentLength = isset($contentLengthHeader[0]) ? $contentLengthHeader[0] : 0;
         $responseCode = $response->getStatusCode();
-
         $id = DB::table('domains')->insertGetId(['name' => $url,
                                                  'created_at' => Carbon::now()->toDateTimeString(),
                                                  'contentLength' => $contentLength,
