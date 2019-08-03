@@ -6,11 +6,12 @@ services:
 before_script:
     - cp .env.travis .env
     - psql -c 'create database homestead_test;'
-    - php artisan migrate --no-interaction
+    - php artisan migrate:install --env=testing --no-interaction -vvv
 install:
     - composer self-update
     - make install
 script:
+    - php artisan migrate --env=testing --no-interaction -vvv
     - make lint test
     
 
