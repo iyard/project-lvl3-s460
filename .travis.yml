@@ -5,7 +5,7 @@ services:
     - postgresql
 before_script:
     - cp .env.travis .env
-    - mysql -e 'create database homestead_test;'
+    - psql -c 'create database homestead_test;'
     - php artisan migrate --no-interaction
 install:
     - composer self-update
