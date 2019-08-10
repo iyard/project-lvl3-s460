@@ -6,8 +6,8 @@
     <!-- Jumbotron -->
     <form action="/domains" method="POST">
         <div class="jumbotron">
-            <h1 class="display-4">Input URL and start!</h1>
-            <p class="lead">This is a simple SEO test for your web-site. Example URL: http://seotest.com</p>
+            <h1 class="display-4">{{ trans('messages.welcomeTitle' )}}</h1>
+            <p class="lead">{{ trans('messages.welcomeText' )}}</p>
             <p>{{ $urlErrorMessage }}</p>
             <hr class="my-4">
             <div class="form-group">

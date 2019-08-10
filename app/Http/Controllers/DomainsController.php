@@ -22,13 +22,13 @@ class DomainsController extends Controller
     {
         $validator = Validator::make($request->all(), ['url' => 'required|URL']);
         if ($validator->fails()) {
-            $urlErrorMessage = 'Not a valid url. Please enter valid URL (example - http://varvy.com)';
+            $urlErrorMessage = trans('messages.errorNotValidUrl');
             return redirect()->route('index.show', ['urlErrorMessage' => $urlErrorMessage]);
         }
         $url = $request->input('url');
 
         if ($this->isUrlAddedToDB($url)) {
-            $urlErrorMessage = 'Url is already added to database.';
+            $urlErrorMessage = trans('messages.errorUrlIsAlreadyAdded');
             return redirect()->route('index.show', ['urlErrorMessage' => $urlErrorMessage]);
         }
         
@@ -51,7 +51,7 @@ class DomainsController extends Controller
     
     public function show($id)
     {
-        $url = DB::select('select * from domains where id = ?', [$id]);
+        $url = DB::table('domains')->where('id', $id)->first();
         return view('domains', ['url' => $url]);
     }
 
@@ -63,7 +63,7 @@ class DomainsController extends Controller
 
     public function isUrlAddedToDB($urlName)
     {
-        $url = DB::select('select * from domains where name = ?', [$urlName]);
+        $url = DB::table('domains')->where('name', $urlName)->first();
         return !empty($url);
     }
 }

@@ -29,6 +29,7 @@
                     </li>
                 </ul>
             </div>
+            <div><a href="">En</a>/<a href="">Ru</a></div>
         </nav>
 
         @yield('content')
