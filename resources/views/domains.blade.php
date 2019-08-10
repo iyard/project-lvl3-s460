@@ -17,13 +17,13 @@
         </thead>
         <tbody>
             <tr>
-            <th scope="row">{{ $url[0]->id }}</th>
-            <td>{{ $url[0]->name }}</td>
-            <td>{{ $url[0]->responseCode }}</td>
-            <td>{{ $url[0]->contentLength }}</td>
-            <td>{{ $url[0]->h1 }}</td>
-            <td>{{ $url[0]->keywords }}</td>
-            <td>{{ $url[0]->description }}</td>
+            <th scope="row">{{ $url->id }}</th>
+            <td>{{ $url->name }}</td>
+            <td>{{ $url->responseCode }}</td>
+            <td>{{ $url->contentLength }}</td>
+            <td>{{ $url->h1 }}</td>
+            <td>{{ $url->keywords }}</td>
+            <td>{{ $url->description }}</td>
             </tr>
         </tbody>
     </table>
